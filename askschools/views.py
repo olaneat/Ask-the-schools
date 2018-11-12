@@ -39,7 +39,7 @@ class add_School(SessionWizardView):
 
 	def done(self, form_list, form_dict, **kwargs):
 		form_data = process_form_data(form_list)
-		return render('index.html',  { form_data:'form_data'})
+		return render('index.html',  { 'form_data': form_data})
 		if form.is_valid():
 			form.save()
 	
