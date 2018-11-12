@@ -1,0 +1,179 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href=" {% static 'css/style.css' %} ">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
+        
+    </script>
+        <script src="{% static 'bootstrap/js/bootstrap.min.js' %}">
+            
+        </script>
+
+
+<body>
+    <div class="container">
+            <div class="row" >
+                <div class="col-lg-12">
+                    <div  class="Header">
+                        <pre>
+                            <p class="text text-uppercase" align="center" >Select the <span class="text-info">Ideal</span> Institution For your <span class="text-primary">Kids</span></p>
+
+
+
+
+
+                            <p class=" text2 text-uppercase" align="center">Pick The Educational Level</p>
+                        </pre>
+                        <button  class="btn btn-primary outline" >Primary 
+                        & Pre-Primary School
+                        </button>
+                        <button class=" btn btn-info" >Secondary Schools
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">   
+                <div class="col-lg-12">
+                    <span class="input-group-addons">                    
+                        <span class="glyphicon glyphicon-user"></span> <span class="text-success"><h3 align="center">PORTAL BENEFITS</h3></span>
+                    </span>
+                </div>  
+            </div>
+                
+                <div class="row">  
+                      <div class="col-lg-6">
+                            <div class="pics">
+                                <img src="{% static "img/parent0000.jpg" %}" class="img-responsive" width="290px" height="350px" align="center" padding=30px>
+                               
+                                <br><br>
+
+
+
+                            </div>             
+
+                        </div>
+
+                        <div class="col-lg-6  ">
+                            <div class="pics ">
+                                
+                                    <img src="{% static "img/school0000.jpg" %}" class="img-responsive" width="290px" height="350px" align="center" >
+                                    
+                                    <br><br>
+                            </div>
+
+                         
+                        </div>
+
+                    </div>
+               </div>
+           </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                <h3 align="center"><span class="text-success">Registered Schools</span></h3><br>
+                </div>
+                <ul>
+                    {% for school in school_list %}
+
+         
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <div class="schoolsDisplay" >
+                            <li>
+                                    <a href=" {{school.get_absuolute_url }} ">{{school.school_badge}}</a>
+                            </li>
+                            {% empty %}
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <div class="schoolsDisplay" >
+                
+                               <li>
+                                    <a href=" {{school.get_absuolute_url }} ">{{school.school_badge}}</a>
+                            </li>
+                            
+
+                           
+                
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <div class="schoolsDisplay" >
+                
+                             <li>
+                                <a href=" {{school.get_absuolute_url }} ">{{school.badge}}</a>
+                            </li>
+                    
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <div class="schoolsDisplay" >
+                                    <li>
+                                        <a href=" {{school.get_absuolute_url }} ">{{school.badge}}</a>
+                                    </li>
+                                
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4"></div>
+                        <div class="col-lg-4 col-md-4 col-sm-4"></div>
+
+                        
+                    </div> 
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4"></div>
+                        <div class="col-lg-4 col-md-4 col-sm-4"></div>
+                        <div class="col-lg-4 col-md-4 col-sm-4"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4"></div>
+                        <div class="col-lg-4 col-md-4 col-sm-4"></div>
+                        <div class="col-lg-4 col-md-4 col-sm-4"></div>
+                    </div>
+  
+                {% endfor %}   
+                </ul>
+
+
+                <div class="row">
+                    <div></div>
+                    <div class="col-lg-3">
+                        <div class="advert"></div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="advert">
+                            
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="advert">
+                            
+                        </div>
+                    </div>    
+                    <div class="col-lg-3">
+                        <div class="advert"></div>
+                    </div>
+
+
+
+                </div>
+
+                </div>
+            </div>
+
+
+{% endblock %}
+
+    </div>
+
+</body>
+
+

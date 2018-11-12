@@ -1,0 +1,29 @@
+.customeFirst{
+	min-height: 200px;
+	width: 100%
+	color: silver;
+}
+li{
+	display: inline;
+ 	padding-right: 10px;
+
+ }
+ul a{
+ 	color: #black;
+
+ }
+ 
+ .pics{
+ 	min-width:100%;
+ 	height:  370px;
+ 	align-content: center;
+ 	padding: 30px; 
+ 	
+ }
+ .advert{
+ 	background: silver;
+ 	min-height: 20px;
+ 	width:100% 
+ }
+ 
+ 

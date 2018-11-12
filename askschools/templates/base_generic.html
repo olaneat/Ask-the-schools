@@ -1,0 +1,210 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %} ">
+	<div id="title">
+		{%block title%}	
+	
+<div class="btm_border">
+    <div class="h_bg">
+    <div class="wrap">
+    <div class="header">
+        <div class="logo">
+            <h1 class="text text-success">Ask The Schools</h1>
+        </div>
+        <div class="social-icons">
+            <ul>
+                 <li><a class="facebook" href="#" target="_blank"> </a></li>
+                 <li><a class="twitter" href="#" target="_blank"></a></li>
+                 <li><a class="googleplus" href="#" target="_blank"></a></li>
+                <li><a class="Instagram" href="#" target="_blank"></a></li>
+                 <li><a class="WhatsApp" href="#" target="_blank"></a></li>
+
+           </ul>
+           
+        </div>
+        <div class="schooladd col-sm-3 offset-9">
+ 
+            <a class="btn btn-info" href='{% url 'add_Schools' %}'>Profile your school <span class="text-warning">for Free</span></a>
+            
+
+       </div>  
+        <div class="clear"></div>
+    </div>
+    <div class='h_btm'>
+        <div class='cssmenu'>
+            <ul>
+                <li ><a href='{% url 'index' %}' ><span>Home</span></a></li>
+                <li><a href='works.html'><span>How it works</span></a></li>
+                <li><a href=''><span>Login</span></a></li>
+                <li class='last'><a href='{% url 'Contact' %}'><span>Contact Us</span></a></li>
+                <div class="clear"></div>
+             </ul>
+    </div>
+    <div class="search" class="col-sm-3 offset-9">
+        <form>
+            <input type="text" value="">
+            <input type="submit" value="">
+        </form>
+    </div>
+    <div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}</div>
+
+<div id="content">
+{% block content%}
+ {% endblock %}
+</div>
+</head>
+<body>
+
+{% block footer %}
+<footer>
+    <section class="w3ls_address_mail_footer_grids">
+        <div class="container">
+        <div class="row">
+            <div class="col-sm-4 w3ls_footer_grid_left">
+                <h5 class="sub-head">Address</h5>
+                <p>Northways Rd Churchill VIC
+                    <span>3842 Australia.</span>
+                </p>
+            </div>
+            <div class="col-sm-4 w3ls_footer_grid_left">
+                <h5 class="sub-head">Contact Us</h5>
+                <p>+(012) 345 6789
+                    <span>+(012) 678 3459</span>
+                </p>
+            </div>
+            <div class="col-sm-4 w3ls_footer_grid_left">
+                <h5 class="sub-head">Mail Us</h5>
+                <p>
+                    <a href="mailto:info@example.com">info@example1.com</a>
+                    <span>
+                        <a href="mailto:info@example.com">info@example2.com</a>
+                    </span>
+                </p>
+            </div>
+            </div>
+            
+            <!-- Newsletter -->
+    
+        </div>
+    </section>
+    </footer>
+    <section class="copyright-wthree">
+        <div class="container">
+            <p>&copy; 2018  All Rights Reserved | Design by Neat 
+            </p>
+            <div class="w3l-social">
+                <ul>
+                    <li>
+                        <a href="#" class="fab fa-facebook-f"></a>
+                    </li>
+                    <li>
+                        <a href="#" class="fab fa-twitter"></a>
+                    </li>
+                    <li>
+                        <a href="#" class="fab fa-google-plus-g"></a>
+                    </li>
+                    <li>
+                        <a href="#" class="fab fa-instagram"></a>
+                    </li>
+                            <li>
+                                <a href="#" class="fab fa-linkedin-in"></a>
+                                <li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- //Footer -->
+
+
+     <!--js working-->
+      <script src="{% static 'js/jquery.min.js' %}"></script>
+      <!--//js working-->
+      <!-- requried-jsfiles-for owl -->
+    <script src="{% static 'js/owl.carousel.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            $("#owl-demo2").owlCarousel({
+                items: 1,
+                lazyLoad: false,
+                autoPlay: true,
+                navigation: false,
+                navigationText: false,
+                pagination: true,
+            });
+        });
+    </script>
+    <!-- //requried-jsfiles-for owl -->
+
+
+        <!-- Slider script -->
+    <script src="{% static 'js/responsiveslides.min.js' %}"></script>
+    <script>
+        // You can also use "$(window).load(function() {"
+        $(function () {
+            $("#slider").responsiveSlides({
+                auto: true,
+                nav: true,
+                manualControls: "#slider3-pager",
+            });
+        });
+    </script>
+<!-- stats -->
+    <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'js/jquery.countup.js' %}"></script>
+    <script>
+        $(".counter-agileits-w3layouts").countUp();
+    </script>
+    <!-- //stats -->
+
+    <!-- smooth scrolling -->
+    <script type="text/javascript" src="{% static 'js/move-top.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/easing.js' %}"></script>
+    <!-- here stars scrolling icon -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            /*
+                var defaults = {
+                containerID: "toTop", // fading element id
+                containerHoverID: "toTopHover", // fading element hover id
+                scrollSpeed: 1200,
+                easingType: "linear" 
+                };
+            */
+                                
+            $().UItoTop({ easingType: "easeOutQuart" });
+                                
+            });
+    </script>
+    <!-- //here ends scrolling icon -->
+<!-- //smooth scrolling -->
+<!-- scrolling script -->
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        $(".scroll").click(function(event){     
+            event.preventDefault();
+            $("html,body").animate({scrollTop:$(this.hash).offset().top},1000);
+        });
+    });
+</script> 
+<!-- //scrolling script -->
+
+<!--bootstrap working-->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+ <!-- //bootstrap working-->
+   </body>
+
+
+{% endblock %}
+
+</body>
+
+
+</html>
