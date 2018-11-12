@@ -38,7 +38,7 @@ class add_School(SessionWizardView):
 	file_storage = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'images', 'videos'))
 
 	def done(self, form_list, form_dict, **kwargs):
-		form = process_form_data(form_list)
+		form_data = process_form_data(form_list)
 		return render('index.html',  { form_data:'form_data'})
 		if form.is_valid():
 			form.save()
@@ -46,7 +46,8 @@ class add_School(SessionWizardView):
 
 
 def process_form_data(form_list):
-	form = form.cleaned_data for form in form_list
+	form_data = [form.cleaned_data for form in form_list]
+	form = form_data
 	data = [' User', 'Schools', 'school_data']
 	#send_mail(
 		#form_data[0]['Schools'],
@@ -54,10 +55,17 @@ def process_form_data(form_list):
 		#['tosinayoola0@gmail.com', ], fail_silently = False)
 	#	)
 
-		if form.is_valid():
-			form.save()
-
-
+def add_school(request):
+	user_form  = UserCreationForm(request.POST or None)
+	school_form1 = Schools(request.POST or None)
+	school_form2 = school_data(request.POST or None)
+	if request.method == 'POST' and \
+			all([user_form.is_valid(), school_form1.is_valid(), school_form2.is_valid()]):
+		user_form.save()
+		school_form1.save()
+		school_form2.save()
+		return redirect(reverse('schools_home')) 
+    
 
 
 
