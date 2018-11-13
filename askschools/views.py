@@ -5,7 +5,7 @@ import os
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.views import View
-from . import forms
+from . forms import SchoolsForm, school_dataForm
 from django.http import HttpResponse
 from django.utils.decorators import classonlymethod
 from django.shortcuts import render
@@ -39,9 +39,7 @@ class add_School(SessionWizardView):
 
 	def done(self, form_list, form_dict, **kwargs):
 		form_data = process_form_data(form_list)
-		return render('index.html',  { 'form_data': form_data})
-		if form.is_valid():
-			form.save()
+		return render('index.html',  { form_data:'form_data'})
 	
 
 
@@ -55,6 +53,28 @@ def process_form_data(form_list):
 		#['tosinayoola0@gmail.com', ], fail_silently = False)
 	#	)
 
+def Contact(request):
+    if request.method == 'POST':
+        form = ContactUsForm(request.POST)
+        if form.is_valid():
+            form.save()
+            context = {'form': form} 
+           
+            return redirect('contactus.html')
+    else:
+        form = ContactUsForm()
+
+    return render(request,  'contactus.html', {'form': form})
+
+def send_mail():
+	send_mail(
+		'Subject here',
+	'Here is the message',
+		'tosinayoola0@gmail.com',
+		['tosinayoola0@gmail.com', '']
+		)
+
+
 def add_school(request):
 	user_form  = UserCreationForm(request.POST or None)
 	school_form1 = Schools(request.POST or None)
@@ -65,55 +85,32 @@ def add_school(request):
 		school_form1.save()
 		school_form2.save()
 		return redirect(reverse('schools_home')) 
-    
 
 
+def add_user(request):
+	create_user = UserCreationForm(request.POST or None)
+	if request.method == 'POST' and create_user.is_valid():
+		request.session['UserCreationForm'] = create_user.cleaned_data 
+		return redirect('add_school_step_one')
 
-
-
-
-
-def Contact(request):
-	if request.method == 'POST':
-		form = ContactUsForm(request.POST)
-		if form.is_valid():
-			title = form.cleaned_data['subject']
-			message = form.cleaned_data['message']
-			full_name = form.cleaned_data['full_name']
-			model_instance =form.save(commit = False)
-			model_instance.timestamp = timezone.now()
-			model_instance.save()
-			form.save()
-			return redirect('/')
-
-
-
-	else:
-		form = ContactUsForm()
-		return render(request, 'contactus.html', {'form': form})
-
-def send_mail():
-	send_mail(
-		'Subject here',
-		'Here is the message',
-		'tosinayoola0@gmail.com',
-		['tosinayoola0@gmail.com', '']
-		)
-
-
-
-
-#Login
-def login_view(request):
-	if request.method == 'POST':
-		form = AuthenticationForm(data= request.POST)
-		if form.is_valid():
-			return render('SchoolDetailPage.html')
 	
 	else:
-		return render(request, 'login.html')
+		return render(request, 'create_user.html',
+			{'create_user': create_user,})
 
+	user_form.save()
+def schoolprofile1(request):
+	school_info = SchoolsForm(request.POST )
+	if request.method == 'POST' and school_info.is_valid():
+		request.session['SchoolsForm'] = school_info.cleaned_data
+		return redirect('add_school_step_two')
 
-def Logout(request):
-	logout(request)
-	return render('index.hmtl')
+	else:
+		return render(request, 'schoolprofile1.html',
+			{'school_info': school_info,})
+
+def schoolprofile2(request):
+	school_data = school_dataForm(request.POST)
+	if request.method == 'POST' and school_data.is_valid():
+		request.session['school_dataForm'] = school_data.cleaned_data
+		return redirect()

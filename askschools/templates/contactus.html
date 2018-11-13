@@ -33,6 +33,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       <!--//stylesheets-->
      <link href="//fonts.googleapis.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
 <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i" rel="stylesheet">
+  
    </head>
    <body>
 
@@ -50,8 +51,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				
 			
 		<div class="col-sm-6">
-			
+			<div class="col-sm-6">
+				<h3 class=" glyphicon glyphicon-map-marker">ADDRESS</h3>
+				
+				<p>
+					No. 34 Yakubu Gwom Way,<br>
+					Jos,<br>
+					Plateau State
+				</p>
+				<br><br>
+			</div>
+	
+			<div class="col-sm-6">
+			<div>
+				<h3 class="glyphicon glyphicon-phone-alt"> TEL:</h3>
+				<p>+2348035381991,<br>
+					+2349082394112
+					
+				</p>
+			</div>
 		</div>
+		</div>
+
+		
+
 		<div class="col-sm-6">
 			<div class="page-Header">
 				
@@ -59,10 +82,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<form method="post" action="/Contact/">
 				{% csrf_token %}
 				{{form.non_field.error}}
+				{{form.errors}}
 				{{ form | crispy }} 
 
 
-					<button type="button" class="btn btn-success">Send</button>
+					<a href=""type="button" class="btn btn-success">Send</a> 
 			
 			<br><br><br><br><br>
 
