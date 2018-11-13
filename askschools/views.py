@@ -39,7 +39,7 @@ class add_School(SessionWizardView):
 
 	def done(self, form_list, form_dict, **kwargs):
 		form_data = process_form_data(form_list)
-		return render('index.html',  { form_data:'form_data'})
+		return render('index.html',  { 'form_data':form_data})
 	
 
 
@@ -99,6 +99,7 @@ def add_user(request):
 			{'create_user': create_user,})
 
 	user_form.save()
+	
 def schoolprofile1(request):
 	school_info = SchoolsForm(request.POST )
 	if request.method == 'POST' and school_info.is_valid():

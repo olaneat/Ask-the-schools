@@ -10,7 +10,8 @@ from . constant import sex, clubs, sport
 
 class profileForm(UserCreationForm):
 	class Meta:
-		fields = '__all__'
+		model = User
+		fields = ['email', 	'first_name', 'last_name', 'username','password1', 'password2']
 
 
 #	def save(self, commit = True):
