@@ -79,7 +79,7 @@ class SchoolsForm(ModelForm):
 	
 		
 
-class school_dataForm(ModelForm):
+class schoolDataForm(ModelForm):
 	
 
 	

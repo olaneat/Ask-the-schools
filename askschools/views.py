@@ -5,7 +5,7 @@ import os
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.views import View
-from . forms import SchoolsForm, school_dataForm
+from . forms import SchoolsForm, schoolDataForm
 from django.http import HttpResponse
 from django.utils.decorators import classonlymethod
 from django.shortcuts import render
@@ -35,7 +35,8 @@ def index(request):
 
 class add_School(SessionWizardView):
 	template_name =  'schoolprofile.html'
-	file_storage = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'images', 'videos'))
+	file_storage = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT,\
+	 'images', 'videos'))
 
 	def done(self, form_list, form_dict, **kwargs):
 		form_data = process_form_data(form_list)
@@ -80,38 +81,36 @@ def add_school(request):
 	school_form1 = Schools(request.POST or None)
 	school_form2 = school_data(request.POST or None)
 	if request.method == 'POST' and \
-			all([user_form.is_valid(), school_form1.is_valid(), school_form2.is_valid()]):
+			all([user_form.is_valid(), \
+				school_form1.is_valid(), school_form2.is_valid()]):
 		user_form.save()
-		school_form1.save()
-		school_form2.save()
-		return redirect(reverse('schools_home')) 
+		schoolprofile1.save()
+		schoolprofile2.save()
+		return redirect(reverse('index')) 
 
 
 def add_user(request):
 	create_user = UserCreationForm(request.POST or None)
 	if request.method == 'POST' and create_user.is_valid():
-		request.session['UserCreationForm'] = create_user.cleaned_data 
+		create_user.save()
 		return redirect('add_school_step_one')
 
-	
-	else:
-		return render(request, 'create_user.html',
-			{'create_user': create_user,})
-
-	user_form.save()
-	
 def schoolprofile1(request):
 	school_info = SchoolsForm(request.POST )
 	if request.method == 'POST' and school_info.is_valid():
 		request.session['SchoolsForm'] = school_info.cleaned_data
 		return redirect('add_school_step_two')
 
-	else:
-		return render(request, 'schoolprofile1.html',
-			{'school_info': school_info,})
+	return render(request, 'schoolprofile1.html',
+		{'school_info': school_info,})
 
 def schoolprofile2(request):
 	school_data = school_dataForm(request.POST)
 	if request.method == 'POST' and school_data.is_valid():
-		request.session['school_dataForm'] = school_data.cleaned_data
+		complete_school_data = {
+		**request.session['school_data'],
+		**schoolprofile2.cleaned_data
+		} 
+		request.session['schoolDataForm'] = school_data.cleaned_data
 		return redirect()
+
