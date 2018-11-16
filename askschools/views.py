@@ -77,16 +77,21 @@ def send_mail():
 
 
 def add_school(request):
-	user_form  = UserCreationForm(request.POST or None)
-	school_form1 = Schools(request.POST or None)
-	school_form2 = school_data(request.POST or None)
+	create_user  = UserCreationForm(request.POST or None)
+	school_info = SchoolsForm(request.POST or None)
+	
 	if request.method == 'POST' and \
-			all([user_form.is_valid(), \
-				school_form1.is_valid(), school_form2.is_valid()]):
-		user_form.save()
-		schoolprofile1.save()
-		schoolprofile2.save()
-		return redirect(reverse('index')) 
+			all([create_user.is_valid(), \
+				school_info.is_valid(),]):
+		create_user.save()
+		school_info.save()
+		
+		return redirect(reverse('index'))
+
+	return render(request, 'create_user_form.html',{
+		'school_info': school_info,
+		'create_user': create_user
+		}) 
 
 
 def add_user(request):
@@ -94,23 +99,33 @@ def add_user(request):
 	if request.method == 'POST' and create_user.is_valid():
 		create_user.save()
 		return redirect('add_school_step_one')
+	
+	return render('create_user_form.html',
+		{'create_user': create_user})
 
 def schoolprofile1(request):
-	school_info = SchoolsForm(request.POST )
-	if request.method == 'POST' and school_info.is_valid():
-		request.session['SchoolsForm'] = school_info.cleaned_data
+	school_info_form = SchoolsForm(request.POST or None )
+	if request.method == 'POST' and school_info_form.is_valid():
+		request.session['school_data'] = school_info_form.cleaned_data
 		return redirect('add_school_step_two')
 
 	return render(request, 'schoolprofile1.html',
-		{'school_info': school_info,})
+		{'school_info_form': school_info_form,})
 
 def schoolprofile2(request):
-	school_data = school_dataForm(request.POST)
-	if request.method == 'POST' and school_data.is_valid():
+	school_data_form = school_dataForm(request.POST)
+	if request.method == 'POST' and school_data_form.is_valid():
+		request.session['schoolDataForm'] = school_data_form.cleaned_data
 		complete_school_data = {
-		**request.session['school_data'],
+		**request.session['school_data_form'],
 		**schoolprofile2.cleaned_data
 		} 
-		request.session['schoolDataForm'] = school_data.cleaned_data
-		return redirect()
+		Schools.object.create(**complete_school_data)		
+
+
+		return redirect('schoolDetail')
+
+	return render(request, 'schoolprofile2.html',{
+		'school_data_form':school_data_form,
+			})
 
