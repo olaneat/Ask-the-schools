@@ -1,8 +1,7 @@
 from django.conf.urls import url
 from django.urls import path
-from . import views
-from . forms import profileForm, SchoolsForm, schoolDataForm
-from . views import add_School, Contact 
+from . import views, forms
+
 
 urlpatterns = [
 	path('', views.index, name = 'index'),

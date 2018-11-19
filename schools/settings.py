@@ -84,6 +84,14 @@ DATABASES = {
     }
 }
 
+#DATABASES = {
+ #   'default': {
+  #      'NAME': 'asktheschools',
+   #     'ENGINE': 'django.db.backends.postgresql',
+    #    'USER': 'postgres_user',
+     #   'PASSWORD': 's3krit'
+    #}
+#}
 
 EMAIL_BACKEND = 'django.core.mail.backend.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
