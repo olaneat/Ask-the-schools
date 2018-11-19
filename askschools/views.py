@@ -91,7 +91,7 @@ def add_user(request):
     create_user.save()
     return redirect('schoolprofile1')
 	
-  return render('create_user_form.html',
+  return render( request, 'create_user_form.html',
     {'create_user': create_user,
     })
 
