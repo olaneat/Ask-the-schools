@@ -4,18 +4,17 @@
 {% load static %}
 
      
-   <body>
-   	{% csrf_token %}
 	{% block content %}
   <form action="{% url 'add_user' %}" method="POST" enctype="application/x-www-form-urlencoded">
+    {% csrf_token %}
     <fieldset>
       <ul>
-        {{ school_data_form | crispy }}
+        {{ school_data | crispy }}
       </ul>
     </fieldset>
     <fieldset>
       
-      <button type="submit" class="text-success">Submit</button>
+      <button type="Submit" class="text-success">Proceed</button>
     </fieldset>
   </form>
 {% endblock content %}

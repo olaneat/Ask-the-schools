@@ -7,7 +7,7 @@ from django.core.files.storage import FileSystemStorage
 from django.views import View, generic
 from django.http import HttpResponse
 #from django.utils.decorators import classonlymethod
-from django.shortcuts import render
+from django.shortcuts import render, redirect,reverse
 import re
 from django.utils import timezone
 from collections import OrderedDict
@@ -16,7 +16,7 @@ from django.views.generic import TemplateView
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from . import models
-from . forms import ContactUsForm
+from . forms import ContactUsForm, SchoolsForm, SchoolDataForm
 from django.core.mail import send_mail
 
 
@@ -96,20 +96,20 @@ def add_user(request):
     })
 
 def schoolprofile1(request):
-  school_info_form = SchoolsForm(request.POST or None )
-  if request.method == 'POST' and school_info_form.is_valid():
-    request.session['school_data'] = school_info_form.cleaned_data
-    return redirect('schoolprofile2')
+  school_info = SchoolsForm(request.POST or None )
+  if request.method == 'POST' and school_info.is_valid():
+    request.session['school_data'] = school_info.cleaned_data
+    return redirect(reverse('schoolprofile2'))
 
   return render(request, 'schoolprofile1.html',
-	{'school_info_form': school_info_form,})
+	{'school_info': school_info,})
 
 def schoolprofile2(request):
-  school_data_form = schoolDataForm(request.POST)
-  if request.method == 'POST' and school_data_form.is_valid():
-    request.session['schoolDataForm'] = school_data_form.cleaned_data
-    complete_school_data = {
-	  **request.session['school_data_form'],
+  school_info_two = SchoolDataForm(request.POST)
+  if request.method == 'POST' and school_data.is_valid():
+    request.session['SchoolDataForm'] = school_info_two.cleaned_data
+    complete_school_data_ = {
+	  **request.session['school_data'],
 	  **schoolprofile2.cleaned_data
 	    } 
     Schools.object.create(**complete_school_data)	
@@ -117,6 +117,6 @@ def schoolprofile2(request):
     return redirect('schoolDetail')
 
   return render(request, 'schoolprofile2.html',{
-	'school_data_form':school_data_form,
+	'school_data':school_info_two,
 	})
 

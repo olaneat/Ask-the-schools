@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
-from . models import Schools, SchoolData, ContactUs
+from . models import Schools, ContactUs
 from . constant import sex, clubs, sport
 
 
@@ -71,10 +71,12 @@ class SchoolsForm(ModelForm):
 
   class Meta:
     model = Schools
-    fields = '__all__'
+    fields = ['SCHOOL_NAME', 'MOTTO', 'BADGE', 'SCHOOL_TYPE', \
+     	'LEVEL', 'ADVANTAGE', 'EMAIL', 'PHONE', 'ADDRESS',\
+     	 'TOWN', 'STATE', ]
 
 	
-class schoolDataForm(ModelForm):
+class SchoolDataForm(ModelForm):
   EXTRA_CURRICULUM = forms.MultipleChoiceField(
 	label = 'CLUB ACTIVITIES',
 	required = False,
@@ -92,8 +94,9 @@ class schoolDataForm(ModelForm):
 
 
   class Meta:
-  	model = SchoolData
-  	fields = '__all__'
+  	model = Schools
+  	fields = ['CURRICULUM', 'AWARDS', 'WEBSITE', 'FEES_RANGE', 'VIDEO',\
+  	 'DIRECTION', 'EXTRA_CURRICULUM']
 
 
 class ContactUsForm(ModelForm):

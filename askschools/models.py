@@ -17,28 +17,26 @@ class Schools(models.Model):
   TOWN = models.CharField( max_length = 100,\
    help_text = 'enter the Local Government Area')
   STATE = models.CharField( max_length = 4, choices = state)	
+  CURRICULUM = models.CharField(max_length =20, null = True, choices = curriculum )
+  WEBSITE = models.URLField(max_length = 100, blank = True )
+  EXTRA_CURRICULUM = models.CharField(max_length = 20, null = True )
+  AWARDS = models.CharField( max_length = 150, blank = True,\
+    help_text ='kindly list the schools Awards')
+  DIRECTION = models.CharField(max_length = 100, null = True,\
+   help_text ='give a brief description to your school ' )
   VIDEO = models.FileField(upload_to = 'media/video', blank= True,\
    help_text = "upload a video file, mp4, " )	
   SCHOOL_TYPE = models.CharField( max_length = 20, choices = school_type)
   FEES_RANGE = models.CharField(max_length = 70,  choices = school_fees  )
   EMAIL = models.EmailField(blank = True, max_length = 50, )
   PHONE = models.CharField(blank = True, max_length = 15)
+  
+  def get_absolute_url(self):
+    return reverse('schools:detail', kwargs={'pk': self.pk})
+
 
   def get_absolute_url(self):
   	return reverse ('school-detail', args = [str(self.id)])		
-
-
-class SchoolData(models.Model):
-  CURRICULUM = models.CharField(max_length =20,  choices = curriculum )
-  WEBSITE = models.URLField(max_length = 100, blank = True )
-  EXTRA_CURRICULUM = models.CharField(max_length = 20)
-  AWARDS = models.CharField( max_length = 150, blank = True,\
-    help_text ='kindly list the schools Awards')
-  DIRECTION = models.CharField(max_length = 100,\
-   help_text ='give a brief description to your school ' )
-
-  def get_absolute_url(self):
-    return reverse('schools:detail', kwargs={'pk': self.pk})
 
 
 class ParentsRemark(models.Model):

@@ -4,12 +4,12 @@
 {% load static %}
 
 
-{% csrf_token %}
 {% block content %}
   <form action="{% url 'add_user' %}" method="POST" enctype="application/x-www-form-urlencoded">
+  	{% csrf_token %}
     <fieldset>
       <ul>
-        {{ school_data_form | crispy }}
+        {{ school_info | crispy }}
       </ul>
       
       <button type="submit" class="text-success">Submit</button>
