@@ -89,11 +89,13 @@ def add_user(request):
   create_user = UserCreationForm(request.POST or None)
   if request.method == 'POST' and create_user.is_valid():
     create_user.save()
-    return redirect('schoolprofile1')
+    return redirect(reverse('schoolprofile1'))
 	
   return render( request, 'create_user_form.html',
     {'create_user': create_user,
     })
+
+
 
 def schoolprofile1(request):
   school_info = SchoolsForm(request.POST or None )
@@ -101,16 +103,17 @@ def schoolprofile1(request):
     request.session['school_data'] = school_info.cleaned_data
     return redirect(reverse('schoolprofile2'))
 
-  return render(request, 'schoolprofile1.html',
-	{'school_info': school_info,})
+  return render(request, 'schoolprofile1.html',{
+    'school_info': school_info,
+    })
+
 
 def schoolprofile2(request):
   school_info_two = SchoolDataForm(request.POST)
   if request.method == 'POST' and school_data.is_valid():
-    request.session['SchoolDataForm'] = school_info_two.cleaned_data
     complete_school_data_ = {
 	  **request.session['school_data'],
-	  **schoolprofile2.cleaned_data
+	  **school_info_two.cleaned_data
 	    } 
     Schools.object.create(**complete_school_data)	
 
@@ -119,4 +122,6 @@ def schoolprofile2(request):
   return render(request, 'schoolprofile2.html',{
 	'school_data':school_info_two,
 	})
+
+
 

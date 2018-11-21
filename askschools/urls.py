@@ -8,6 +8,7 @@ urlpatterns = [
 	path('schoolprofile/step-two', views.schoolprofile2, name='schoolprofile2'),
 	path('schoolprofile/step-one', views.schoolprofile1, name = 'schoolprofile1'),
 	path('schoolprofile/add-user', views.add_user, name= 'add_user'),
+	path('schoolprofile', views.add_school, name='add_school'),
 	#path(r'ProfileYourSchool', add_School.as_view([profileForm, SchoolsForm, schoolDataForm]), name = 'add_Schools'),
 	path(r'ContactUs', views.Contact, name = 'Contact'),
 ]
