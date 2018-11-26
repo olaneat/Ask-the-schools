@@ -35,9 +35,6 @@ class Schools(models.Model):
     return reverse('schools:detail', kwargs={'pk': self.pk})
 
 
-  def get_absolute_url(self):
-  	return reverse ('school-detail', args = [str(self.id)])		
-
 
 class ParentsRemark(models.Model):
   full_name = models.CharField(max_length = 300,\

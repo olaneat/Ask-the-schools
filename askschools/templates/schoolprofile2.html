@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+
 {% load crispy_forms_tags %}
 {% load static %}
 
@@ -9,12 +9,12 @@
     {% csrf_token %}
     <fieldset>
       <ul>
-        {{ school_data | crispy }}
+        {{ school_info_two | crispy }}
       </ul>
     </fieldset>
     <fieldset>
       
-      <button type="Submit" class="text-success">Proceed</button>
+      <button type="Submit" class="text-success">Submit</button>
     </fieldset>
   </form>
 {% endblock content %}

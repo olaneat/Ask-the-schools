@@ -8,9 +8,7 @@ school_fees  =(
 	('#601,000.00  - 700,000.00', '#601,000.00  - 700,000.00'),	
 	('#701,000.00  - 800,000.00', '#701,000.00  - 800,000.00'),
 	('#801,000.00  - 900,000.00', '#801,000.00  - 900,000.00'),
-	('#901,000.00  - 1,000,000.00', '#901,000.00  - 1,000,000.00'),
-
-	)
+	('#901,000.00  - 1,000,000.00', '#901,000.00  - 1,000,000.00'),)
 
 
 state = (
@@ -50,29 +48,24 @@ state = (
 	('TAR', 'TARABA'),
 	('YOB', 'YOBE'),
 	('ZAM', 'ZAMFARA'),
-	('FCT', 'FEDERAL CAPITAL TERRITORY'),
-	)
+	('FCT', 'FEDERAL CAPITAL TERRITORY'),)
 
 school_type = (
 	('Day', 'Day'),
 	('Boarding', 'Boarding'),
-	('Boarding and Day', 'Boarding and Day'),
-	) 
+	('Boarding and Day', 'Boarding and Day'),) 
 
 level = (
 	('Pri', 'Primary' ),
 	('Sec', 'Secondary',),
-	('Pri and Sec', 'Primary and Secondary')
-	) 
+	('Pri and Sec', 'Primary and Secondary'),) 
 
 curriculum = (
 	('Bri', 'British'),
 	('Ame', 'American'),
 	('Bri & Ame', 'British American'),
 	('Ger', 'German'),
-	('Fre', 'French'),
-
-	)
+	('Fre', 'French'),)
 
 clubs = (
 	('jet', 'Jet Club'),
@@ -89,9 +82,7 @@ clubs = (
 	('Adventure', 'Adventure Club'),
 	('Religious', 'Religious Club'),
 	('Charity', 'Charity Club'),
-	('Feeders', 'Feeders Club'),
-
-	)
+	('Feeders', 'Feeders Club'),)
 
 sport = (
 	( 'Swimming Pool', 'Swimming '),
@@ -102,12 +93,10 @@ sport = (
 	('Race Track', 'Race'),
 	('Javelline', 'Javelline'),
 	('Short Put', 'Short Put'),
-	('Chess Board', 'Chess')
-	) 
+	('Chess Board', 'Chess'),) 
 
 
-sex = [
+sex = (
  	('male', 'Male Only'),
  	('female', 'Female Only'),
- 	('mixed', 'Mixed'),
- 	]
+ 	('mixed', 'Mixed'),)

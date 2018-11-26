@@ -1,20 +1,13 @@
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
-import os
 from django.conf import settings
-from django.core.files.storage import FileSystemStorage
 from django.views import View, generic
 from django.http import HttpResponse
-#from django.utils.decorators import classonlymethod
 from django.shortcuts import render, redirect,reverse
-import re
 from django.utils import timezone
-from collections import OrderedDict
 from django.views.generic import TemplateView
-#from formtools.wizard.views import SessionWizardView, WizardView
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from . import models
 from . forms import ContactUsForm, SchoolsForm, SchoolDataForm
 from django.core.mail import send_mail
@@ -64,8 +57,7 @@ def send_mail():
   	'Subject here',
   	'Here is the message',
   	'tosinayoola0@gmail.com',
-  	['tosinayoola0@gmail.com', '']
-   	)
+  	['tosinayoola0@gmail.com', ''])
 
 
 def add_school(request):
@@ -81,31 +73,29 @@ def add_school(request):
 
   return render(request, 'create_user_form.html',{
     'school_info': school_info,
-	'create_user': create_user
-	}) 
+	'create_user': create_user}) 
 
 
 def add_user(request):
   create_user = UserCreationForm(request.POST or None)
   if request.method == 'POST' and create_user.is_valid():
     create_user.save()
-    return redirect(reverse('schoolprofile1'))
+    return redirect('schoolprofile1')
 	
   return render( request, 'create_user_form.html',
-    {'create_user': create_user,
-    })
-
+    {'create_user': create_user,})
 
 
 def schoolprofile1(request):
-  school_info = SchoolsForm(request.POST or None )
+  school_info = SchoolsForm(request.POST or None)
   if request.method == 'POST' and school_info.is_valid():
     request.session['school_data'] = school_info.cleaned_data
     return redirect(reverse('schoolprofile2'))
 
-  return render(request, 'schoolprofile1.html',{
+  return render(request, 'schoolprofile1.html', {
     'school_info': school_info,
-    })
+  })
+
 
 
 def schoolprofile2(request):
@@ -113,15 +103,11 @@ def schoolprofile2(request):
   if request.method == 'POST' and school_data.is_valid():
     complete_school_data_ = {
 	  **request.session['school_data'],
-	  **school_info_two.cleaned_data
-	    } 
+	  **school_info_two.cleaned_data} 
     Schools.object.create(**complete_school_data)	
 
-    return redirect('schoolDetail')
+    return redirect('index')
 
   return render(request, 'schoolprofile2.html',{
-	'school_data':school_info_two,
-	})
-
-
+	'school_data':school_info_two,})
 
