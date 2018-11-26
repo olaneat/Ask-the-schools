@@ -90,7 +90,7 @@ def schoolprofile1(request):
   school_info = SchoolsForm(request.POST or None)
   if request.method == 'POST' and school_info.is_valid():
     request.session['school_data'] = school_info.cleaned_data
-    return redirect(reverse('schoolprofile2'))
+    return redirect('schoolprofile2')
 
   return render(request, 'schoolprofile1.html', {
     'school_info': school_info,
@@ -99,7 +99,7 @@ def schoolprofile1(request):
 
 
 def schoolprofile2(request):
-  school_info_two = SchoolDataForm(request.POST)
+  school_info_two = SchoolDataForm(request.POST or None)
   if request.method == 'POST' and school_data.is_valid():
     complete_school_data_ = {
 	  **request.session['school_data'],
@@ -110,4 +110,3 @@ def schoolprofile2(request):
 
   return render(request, 'schoolprofile2.html',{
 	'school_data':school_info_two,})
-
