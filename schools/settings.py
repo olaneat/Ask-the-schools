@@ -85,12 +85,16 @@ WSGI_APPLICATION = 'schools.wsgi.application'
 #}
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+   'default': {
+      'NAME': 'asktheschools',
+        'ENGINE': 'django.db.backends.postgresql',
+        'USER': 'olaneat',
+        'PASSWORD': '123456',
+         'PORT': '5432',
+         'HOST': 'localhost'
+
     }
 }
-
 
 EMAIL_BACKEND = 'django.core.mail.backend.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
