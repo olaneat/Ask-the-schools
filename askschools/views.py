@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect,reverse
 from django.utils import timezone
 from django.views.generic import TemplateView
 from django.urls import reverse_lazy
-from . import models
+from . models import Schools, ContactUs, ParentsRemark
 from . forms import ContactUsForm, SchoolsForm, SchoolDataForm
 from django.core.mail import send_mail
 
@@ -80,7 +80,7 @@ def add_user(request):
   create_user = UserCreationForm(request.POST or None)
   if request.method == 'POST' and create_user.is_valid():
     create_user.save()
-    return redirect('schoolprofile1')
+    return redirect ('schoolprofile1')
 	
   return render( request, 'create_user_form.html',
     {'create_user': create_user,})
@@ -90,7 +90,7 @@ def schoolprofile1(request):
   school_info = SchoolsForm(request.POST or None)
   if request.method == 'POST' and school_info.is_valid():
     request.session['school_data'] = school_info.cleaned_data
-    return redirect(reverse('schoolprofile2'))
+    return redirect('schoolprofile2')
 
   return render(request, 'schoolprofile1.html', {
     'school_info': school_info,
@@ -99,12 +99,12 @@ def schoolprofile1(request):
 
 
 def schoolprofile2(request):
-  school_info_two = SchoolDataForm(request.POST)
-  if request.method == 'POST' and school_data.is_valid():
-    complete_school_data_ = {
+  school_info_two = SchoolDataForm(request.POST or None)
+  if request.method == 'POST' and school_info_two.is_valid():
+    complete_school_info = {
 	  **request.session['school_data'],
 	  **school_info_two.cleaned_data} 
-    Schools.object.create(**complete_school_data)	
+    Schools.objects.create(**complete_school_info)	
 
     return redirect('index')
 
