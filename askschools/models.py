@@ -5,7 +5,7 @@ from . constant import level, sex, clubs, sport, school_fees, state, school_type
 
 
 class Sports(models.Model):
-  sport = models.CharField(max_length = 450)
+  sport = models.CharField(max_length = 150)
 
 class gender(models.Model):
   sex = models.CharField(max_length = 15)

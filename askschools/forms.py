@@ -4,9 +4,9 @@ from django.contrib.auth.models import User
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
-from . models import Schools, ContactUs, Sports
-from . constant import sex, clubs, sport
-
+from . models import Schools, ContactUs, Sports, Club, gender
+#from django.forms.widgets import RadioSelect
+from . constant import sex
 
 class profileForm(UserCreationForm):
   class Meta:
@@ -65,8 +65,8 @@ class SchoolsForm(ModelForm):
 
   GENDER = forms.ChoiceField(label =" SCHOOL GENDER",
     choices = sex, 
-	widget = forms.RadioSelect(),
-	  )
+	widget = forms.RadioSelect())
+	
 
 
   class Meta:
@@ -77,15 +77,17 @@ class SchoolsForm(ModelForm):
 
 	
 class SchoolDataForm(ModelForm):
-  EXTRA_CURRICULUM = forms.MultipleChoiceField(
+  EXTRA_CURRICULUM = forms.ModelMultipleChoiceField(
+  	queryset = Club.objects.all(),
 	label = 'CLUB ACTIVITIES',
 	required = False,
-	widget = forms.CheckboxSelectMultiple,
-	choices = clubs )
+	widget = forms.CheckboxSelectMultiple,)
 
-  SPORT = forms.MultipleChoiceField(
-	widget=forms.CheckboxSelectMultiple,
-	queryset=Sports.objects.all(),)
+  SPORT = forms.ModelMultipleChoiceField(
+	queryset=Sports.objects.all(),
+	label = 'SPORT ACTIVITIES' ,
+	widget=forms.CheckboxSelectMultiple)
+
 
 
   class Meta:
