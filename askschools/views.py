@@ -109,5 +109,5 @@ def schoolprofile2(request):
     return redirect('index')
 
   return render(request, 'schoolprofile2.html',{
-	'school_data':school_info_two,})
+	'school_info_two':school_info_two,})
 

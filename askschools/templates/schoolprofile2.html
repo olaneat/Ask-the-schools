@@ -1,20 +1,21 @@
 {% extends "base.html" %}
-
 {% load crispy_forms_tags %}
 {% load static %}
 
      
 	{% block content %}
-  <form action="{% url 'schoolprofile2' %}" method="POST" enctype="application/x-www-form-urlencoded">
+  <form action="{% url 'schoolprofile1' %}" method="POST" enctype="application/x-www-form-urlencoded">
     {% csrf_token %}
     <fieldset>
       <ul>
-        {{ school_info_two | crispy }}
+        
+         {{ school_info_two | crispy }}
+
       </ul>
     </fieldset>
     <fieldset>
       
-      <button type="Submit" class="text-success">Submit</button>
+      <button type="Submit" class="text-success">SUBMIT</button>
     </fieldset>
   </form>
 {% endblock content %}
