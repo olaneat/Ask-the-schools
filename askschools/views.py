@@ -19,6 +19,63 @@ def index(request):
   return render (request, 'index.html')
 
 
+def add_user(request):
+  create_user = UserCreationForm(request.POST or None)
+  if request.method == 'POST' and create_user.is_valid()\
+  and create_user.cleaned_data:
+    create_user.save()
+    return redirect ('schoolprofile1')
+
+  return render( request, 'create_user_form.html',
+    {'create_user': create_user,})
+
+
+def schoolprofile1(request):
+  school_info = SchoolsForm(request.POST or None)
+  if request.method == 'POST' and school_info.is_valid():
+    request.session['school_data'] = school_info.cleaned_data
+    return redirect(reverse('schoolprofile2'))
+
+  return render(request, 'schoolprofile1.html', {
+    'school_info': school_info,})
+
+
+
+def schoolprofile2(request):
+  school_info_two = SchoolDataForm(request.POST or None)
+  if request.method == 'POST' and school_info_two.is_valid():
+    complete_school_info = {
+      **request.session['school_data'],
+      **school_info_two.cleaned_data}
+
+    Schools.objects.create(**complete_school_info)
+
+    return redirect('index')
+
+  return render(request, 'schoolprofile2.html',{
+    'school_info_two':school_info_two,})
+
+
+def Contact(request):
+  contactForm = ContactUsForm(request.POST or None)
+  if request.method == 'POST' and contactForm.is_valid():
+    contactForm.save()
+    context = {'contactForm': contactForm}
+    return redirect('contactus.html')
+  else:
+    form = ContactUsForm()
+
+  return render(request,  'contactus.html', {'contactForm': contactForm})
+
+
+
+def send_mail():
+  send_mail(
+  	'Subject here',
+  	'Here is the message',
+  	'tosinayoola0@gmail.com',
+  	['tosinayoola0@gmail.com', ''])
+
 
 #class add_School(SessionWizardView):
  # template_name =  'schoolprofile.html'
@@ -28,7 +85,7 @@ def index(request):
  # def done(self, form_list, form_dict, **kwargs):
   #  form_data = process_form_data(form_list)
    # return render('index.html',  { 'form_data':form_data})
-	
+
 #def process_form_data(form_list):
  # form_data = [form.cleaned_data for form in form_list]
   #form = form_data
@@ -39,75 +96,18 @@ def index(request):
 	#['tosinayoola0@gmail.com', ], fail_silently = False)
 	#)
 
-def Contact(request):
-  if request.method == 'POST':
-    form = ContactUsForm(request.POST)
-    if form.is_valid():
-      form.save()
-      context = {'form': form} 
-        
-      return redirect('contactus.html')
-  else:
-    form = ContactUsForm()
 
-  return render(request,  'contactus.html', {'form': form})
+#def add_school(request):
+ # create_user  = UserCreationForm(request.POST or None)
+  #school_info = SchoolsForm(request.POST or None)
+#
+ # if request.method == 'POST' and \
+#    all([create_user.is_valid(),school_info.is_valid(),]):
+#        create_user.save()
+#        school_info.save()
+#
+#        return redirect(reverse('index'))
 
-def send_mail():
-  send_mail(
-  	'Subject here',
-  	'Here is the message',
-  	'tosinayoola0@gmail.com',
-  	['tosinayoola0@gmail.com', ''])
-
-
-def add_school(request):
-  create_user  = UserCreationForm(request.POST or None)
-  school_info = SchoolsForm(request.POST or None)
-	
-  if request.method == 'POST' and \
-    all([create_user.is_valid(),school_info.is_valid(),]):
-        create_user.save()
-        school_info.save()
-
-        return redirect(reverse('index'))
-
-  return render(request, 'create_user_form.html',{
-    'school_info': school_info,
-	'create_user': create_user}) 
-
-
-def add_user(request):
-  create_user = UserCreationForm(request.POST or None)
-  if request.method == 'POST' and create_user.is_valid():
-    create_user.save()
-    return redirect ('schoolprofile1')
-	
-  return render( request, 'create_user_form.html',
-    {'create_user': create_user,})
-
-
-def schoolprofile1(request):
-  school_info = SchoolsForm(request.POST or None)
-  if request.method == 'POST' and school_info.is_valid():
-    request.session['school_data'] = school_info.cleaned_data
-    return redirect('schoolprofile2')
-
-  return render(request, 'schoolprofile1.html', {
-    'school_info': school_info,
-  })
-
-
-
-def schoolprofile2(request):
-  school_info_two = SchoolDataForm(request.POST or None)
-  if request.method == 'POST' and school_info_two.is_valid():
-    complete_school_info = {
-	  **request.session['school_data'],
-	  **school_info_two.cleaned_data} 
-    Schools.objects.create(**complete_school_info)	
-
-    return redirect('index')
-
-  return render(request, 'schoolprofile2.html',{
-	'school_info_two':school_info_two,})
-
+ # return render(request, 'create_user_form.html',{
+#    'school_info': school_info,
+#	'create_user': create_user})

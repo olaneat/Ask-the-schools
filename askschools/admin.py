@@ -5,9 +5,9 @@ from .models import Schools, ParentsRemark
 
 @admin.register(Schools)
 class schoolsadmin(admin.ModelAdmin):
-	list_display = ('SCHOOL_NAME','MOTTO', 'BADGE', 'LEVEL' ,  'ADVANTAGE', 'ADDRESS',\
-	 'SCHOOL_TYPE', 'FEES_RANGE', 'EMAIL', 'PHONE', 'VIDEO', 'TOWN', 'STATE', \
-	 'CURRICULUM', 'EXTRA_CURRICULUM',  'AWARDS', 'DIRECTION', 'WEBSITE')
+	list_display = ('School_name','Motto', 'Badge', 'Level' ,  'Advantage', 'Address',\
+	 'School_type', 'Fees_range', 'Email', 'Phone', 'Video', 'Town', 'State', \
+	 'Curriculum', 'Extra_curriculum',  'Awards', 'Direction', 'Website')
 
 
 @admin.register(ParentsRemark)

@@ -89,7 +89,7 @@ DATABASES = {
       'NAME': 'asktheschools',
         'ENGINE': 'django.db.backends.postgresql',
         'USER': 'olaneat',
-        'PASSWORD': '123456',
+        'PASSWORD': '1234567',
          'PORT': '5432',
          'HOST': 'localhost'
 

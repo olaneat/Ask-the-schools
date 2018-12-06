@@ -4,7 +4,6 @@
 {% load static %}
 
 
- 
  {% block content %}
   <form action="{% url 'add_user' %}" method="POST" enctype="application/x-www-form-urlencoded">
     {% csrf_token %}
@@ -14,7 +13,7 @@
       </ul>
     </fieldset>
     <fieldset>
-      
+
       <button type="submit" class="text-success">Sign Up</button>
     </fieldset>
   </form>
