@@ -5,12 +5,16 @@ from . constant import level, sex, clubs, sport, school_fees, state, school_type
 class Sports(models.Model):
   sport = models.CharField(max_length = 150, choices = sport )
 
+  def __str__(self):
+    return self.spot
 
-class gender(models.Model):
-  sex = models.CharField(max_length = 15, choices = sex)
 
 class Club(models.Model):
   club = models.CharField(max_length = 300, choices = clubs)
+
+  def __str__(self):
+    return self.club
+
 
 class Schools(models.Model):
   School_name = models.CharField(max_length = 300, )
@@ -21,7 +25,7 @@ class Schools(models.Model):
   Advantage = models.TextField(blank = True, max_length = 1000,\
    help_text = '''what do parents tend to benefit  by entrusting their children
 	in your school not more than 1000 characters'''  )
-  Gender = models.BooleanField('complete', default ='True')
+  Gender = models.CharField( max_length = 7, choices = sex)
   Address = models.CharField( max_length  = 250 )
   Town = models.CharField( max_length = 100,\
    help_text = 'enter the Local Government Area')

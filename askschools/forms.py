@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
-from . models import Schools, ContactUs, Sports, Club, gender
+from . models import Schools, ContactUs, Sports, Club
 from . constant import sex
 
 class profileForm(UserCreationForm):
