@@ -1,19 +1,19 @@
 from django.db import models
-from . constant import level, sex, clubs, sport, school_fees, state, school_type, curriculum
+from . constant import level, school_fees, state, sex, school_type, curriculum
 
 
-class Sports(models.Model):
-  sport = models.CharField(max_length = 150, choices = sport )
+class Sport(models.Model):
+  name = models.CharField(max_length = 150 )
 
   def __str__(self):
-    return self.spot
+    return self.name
 
 
 class Club(models.Model):
-  club = models.CharField(max_length = 300, choices = clubs)
+  name = models.CharField(max_length = 300)
 
   def __str__(self):
-    return self.club
+    return self.name
 
 
 class Schools(models.Model):
@@ -35,7 +35,7 @@ class Schools(models.Model):
   Extra_curriculum = models.CharField(max_length = 20, null = True )
   Awards = models.CharField( max_length = 150, blank = True,\
     help_text ='kindly list the schools Awards')
-  Sport_activities = models.ManyToManyField(Sports)
+  Sports = models.ManyToManyField(Sport)
   Direction = models.CharField(max_length = 100, null = True,\
    help_text ='give a brief description to your school ' )
   Video = models.FileField(upload_to = 'media/video', blank= True,\
